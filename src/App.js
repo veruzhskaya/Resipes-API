@@ -26,7 +26,10 @@ useEffect ( () => {
   const getRecipe = async() => {
     const response = await fetch (`https://api.edamam.com/api/recipes/v2?type=public&q=${submitted}&app_id=${MY_ID}&app_key=${MY_API}`)
     const data = await response.json();
-    console.log(data.hits)
+    if (data.count === 0) {
+      alert ('No recipes found');
+      setMySearch ('');
+    }
     setMyRecipes(data.hits)
   }
   getRecipe()
